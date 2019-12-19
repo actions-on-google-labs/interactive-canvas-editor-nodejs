@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Copyright 2019 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Canvas Action</title>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/5.9.4/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/5.9.4/firebase-auth.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-database.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-firestore.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+
+  <!-- Load Stats.js for fps monitoring -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+
+  <!-- Main script -->
+  <script src="js/canvas.js"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/canvas.css" type="text/css">
+
+  <!-- Disable favicon requests -->
+  <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,">
+
+  <!-- Load Interactive Canvas JavaScript -->
+  <script src="https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas.min.js"></script>
+</head>
+
+<body>
+  <div id="message">
+    <h2>Interactive Canvas</h2>
+    <p>Your number code is: <span id="code"></span></p>
+    <p>Load the following URL in a browser: <b id="hostingUrl">https://YOUR_PROJECT_ID.firebaseapp.com</b></p>
+  </div>
+  <div id="linked">
+    <h1>Linked to the editor.</h1>
+    <p>Use the Run button in the editor to update this view.</p>
+  </div>
+  <p id="load">Firebase SDK Loading&hellip;</p>
+
+  <iframe id="iframe" allow="autoplay" sandbox="allow-forms allow-modals allow-popups allow-scripts allow-same-origin"
+    src="">
+    Your browser doesn't support iframes
+  </iframe>
+
+  <div class="debug">
+    <div class="stats"></div>
+    <div class="logs"></div>
+  </div>
+
+</body>
+
+</html>

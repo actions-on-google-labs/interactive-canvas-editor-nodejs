@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+Copyright 2019 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Interactive Canvas Editor</title>
+
+  <!-- Disable favicon requests -->
+  <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,">
+
+  <!-- Firebase -->
+  <script defer src="/__/firebase/5.9.4/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/5.9.4/firebase-auth.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-database.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-firestore.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/5.9.4/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+
+  <!-- Beautify Web - HTML, CSS, JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.0/beautify-html.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.0/beautify-css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.10.0/beautify.min.js"></script>
+  <!-- Ace Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.4/ace.js" type="text/javascript" charset="utf-8">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.4/ext-language_tools.js" type="text/javascript"
+    charset="utf-8"></script>
+
+  <!-- Material Design Lite -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <!-- Main script -->
+  <script src="js/main.js"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+  <!-- Header layout. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title title">Interactive Canvas Editor</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. -->
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="" id="run"><i class="material-icons">play_arrow</i>&nbsp;Run</a>
+          <a class="mdl-navigation__link" href="" id="format"><i
+              class="material-icons">format_align_justify</i>&nbsp;Format</a>
+        </nav>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col">
+            <div id="sidebar">
+              <div id="message">
+                <p>On your smart display invoke the canvas Action: "hey google, talk to my test app"</p>
+                <p>Enter the number code provided on the smart display.</p>
+                <form onsubmit="return false" id="form">
+                  Number code:<br>
+                  <input type="number" id="code" maxlength="4" size="4" required min="0" max="9999"><br>
+                  <input type="submit" id="submit">
+                </form>
+              </div>
+              <p id="instructions">
+                Click on the <b>Run</b> button and the code should now start running on your device. Every time you make
+                a change to any of the panel's contents, click on the <b>Run</b> button again to sync the changes.<br />
+                Click on the <b>Format</b> button to format the code in each of the editors.
+              </p>
+              <p id="load">Firebase SDK Loading&hellip;</p>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--10-col">
+
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="editorCell">
+                  HTML
+                  <div class="editor" id="htmlEditor"></div>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="editorCell">
+                  CSS
+                  <div class="editor" id="cssEditor"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="editorCell">
+                  JavaScript
+                  <div class="editor" id="jsEditor"></div>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="editorCell">
+                  Output
+                  <iframe class="editor" id="iframe" sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
+                    frameborder="0"></iframe>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div> <!-- end page-content -->
+    </main>
+  </div>
+</body>
+
+</html>
